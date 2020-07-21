@@ -33,9 +33,9 @@ export class PgDatabase implements Database {
     private db: any;
 
     constructor() {
-        const DB_USER = process.env.POSTRGES_USER;
+        const DB_USER = process.env.POSTGRES_USER;
         if (DB_USER == undefined)
-            throw 'User for postgres has not been defined. Please define it in .env file under POSTRGES_USER';
+            throw 'User for postgres has not been defined. Please define it in .env file under POSTGRES_USER';
 
         let DB_HOST: string;
         if (config.has('db.host'))

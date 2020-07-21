@@ -47,13 +47,13 @@ Create `.env` file in root directory. It should contain next values:
 ```bash
 SEED=
 POSTGRES_PASSWORD=
-POSTRGES_USER=
+POSTGRES_USER=
 POSTGRES_DB=
 ```
 
 * `SEED` - Seed for account to make transactions on IOTA tangle.
 * `POSTGRES_PASSWORD` - Password for postgres.
-* `POSTRGES_USER` - User for postgres.
+* `POSTGRES_USER` - User for postgres.
 * `POSTGRES_DB` - Database to connect to in postgres.
 
 ### 2.3. Dockerfile
