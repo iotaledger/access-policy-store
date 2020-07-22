@@ -27,6 +27,7 @@ export class StringRes {
     public static readonly MISSING_POLICY: string = 'missing policy';
     public static readonly MISSING_OWNER: string = 'missing owner';
     public static readonly MISSING_DEVICE_ID: string = 'missing deviceId';
+    public static readonly MISSING_SIGNATURE: string = 'missing signature';
     public static readonly POLICY_ALREADY_EXIST: string = 'policy already exist';
     public static readonly POLICY_ADDED_SUCCESSFULLY: string = 'Policy added successfully';
     public static readonly POLICY_STORE_EMPTY: string = 'Policy store empty';

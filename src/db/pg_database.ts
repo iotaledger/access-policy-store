@@ -26,11 +26,11 @@ import config from 'config';
 
 
 /**
- * Class for communicating with PostgreSQL database
+ * Class for communicating with PostgreSQL database.
  */
 export class PgDatabase implements Database {
 
-    private db: any;
+    private database: any;
 
     constructor() {
         const DB_USER = process.env.POSTGRES_USER;
@@ -57,29 +57,30 @@ export class PgDatabase implements Database {
         if (DB_PASSWORD == undefined)
             throw 'Password for postgres has not been defined. Please define it in .env file under POSTGRES_PASSWORD';
 
-        const cn = {
+        const connection = {
             user: DB_USER,
             host: DB_HOST,
             database: DB_DATABASE,
             password: DB_PASSWORD,
             port: DB_PORT,
         };
-        this.db = pgp(cn);
+
+        this.database = pgp(connection);
 
         // try to connect to database
-        this.db.connect()
+        this.database.connect()
             .then((obj: any) => {
                 logger.info('Successfully connected to the database');
                 obj.done();
             })
             .catch((error: any) => {
-                logger.error('Unable to connect to the database: ', error);
+                logger.warn('Unable to connect to the database: ', error);
             })
     }
 
     async getPolicyListByDeviceId(deviceId: string): Promise<readonly Policy[]> {
         try {
-            const result: ReadonlyArray<Policy> = await this.db
+            const result: ReadonlyArray<Policy> = await this.database
                 .any('SELECT * FROM policy WHERE "deviceId"=$1', [deviceId]);
 
             return Promise.resolve(result);
@@ -90,7 +91,7 @@ export class PgDatabase implements Database {
 
     async getPolicyByPolicyId(policyId: string): Promise<Readonly<Policy>> {
         try {
-            const res = await this.db.any('SELECT * FROM policy WHERE "policyId"=$1 LIMIT 1', [policyId]);
+            const res = await this.database.any('SELECT * FROM policy WHERE "policyId"=$1 LIMIT 1', [policyId]);
             if (_.isEmpty(res))
                 return Promise.reject(`Unable to find policy with policyId: ${policyId}`);
             else
@@ -102,7 +103,7 @@ export class PgDatabase implements Database {
 
     async addNewPolicy(policy: Policy): Promise<void> {
         try {
-            await this.db.query('INSERT INTO policy(hash,owner,"policyId","deviceId") VALUES($1,$2,$3,$4)',
+            await this.database.query('INSERT INTO policy(hash,owner,"policyId","deviceId") VALUES($1,$2,$3,$4)',
                 [policy.hash, policy.owner, policy.policyId, policy.deviceId]);
 
             return Promise.resolve();
@@ -113,7 +114,7 @@ export class PgDatabase implements Database {
 
     async deletePoliciesForDeviceWithId(deviceId: string): Promise<void> {
         try {
-            await this.db.query('DELETE FROM policy WHERE "deviceId"=$1', [deviceId]);
+            await this.database.query('DELETE FROM policy WHERE "deviceId"=$1', [deviceId]);
             return Promise.resolve();
         } catch (err) {
             return Promise.reject(err);

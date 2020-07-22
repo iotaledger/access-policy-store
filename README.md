@@ -3,20 +3,20 @@
 Policy store consists of interface servers for managing delegation policies on IOTA tangle.
 It is able to manage REST and TCP requests and it communicates with IOTA IRI node for storing policies and local SQL database where their tangle addresses are stored.
 
-## 1. Compiling
-Store is written in `TypeScript`. To run it, it must be compiled to `JavaScript` using `TypeScript` compiler. Make sure you have `TypeScript` compiler installed on your system, as well as the project dependencies.
-
+## 1.0 Prerequisites
+You should have installed npm (Node Package Manager) on your system. If you don't have install it by running
 ```bash
 sudo apt-get install npm
-sudo npm install -g typescript
-npm i @types/node @types/node @iota/core @iota/converter config @types/config log4js lodash @types/lodash js-sha256 express @types/express body-parser @types/body-parser @types/bluebird pg-promise dotenv
 ```
-
-Then, run it in root directory:
+## 1.1 Building
+First install all dependencies by running next command inside projects root directory
 ```bash
-tsc
+npm install
 ```
-It will generate `dist` folder containing `JavaScript` code for store.
+Store is written in `TypeScript`. To run it, it must be compiled to `JavaScript` using `TypeScript` compiler. Build the project by running `build` script.
+```bash
+npm run build
+```
 
 ## 2. Configuring
 Configuring is done via `config`, `.env` and `Dockerfile` files.
