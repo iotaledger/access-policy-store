@@ -22,36 +22,36 @@ export interface Controller {
     type: CommunicationType
 
     /**
-     * Adds new policy
+     * Adds new policy.
      * 
-     * @param body Request body
+     * @param body Request body.
      */
     addPolicy(body: Body): Promise<any>
 
     /**
-     * Clears list of policy
+     * Clears list of policy.
      * 
-     * @param body Request body
+     * @param body Request body.
      */
     clearPolicyList(body: Body): Promise<any>
 
     /**
-     * Gets single policy
+     * Gets single policy.
      * 
-     * @param body Request body
+     * @param body Request body.
      */
     getPolicy(body: Body): Promise<any>
 
     /**
-     * Gets list of policies
+     * Gets list of policies.
      * 
-     * @param body Request body
+     * @param body Request body.
      */
     getPolicyList(body: Body): Promise<any>
 }
 
 /**
- * Interface represenging body of request
+ * Interface representing body of request.
  */
 export interface Body {
     cmd: string
@@ -60,6 +60,7 @@ export interface Body {
     policy?: any
     policyStoreId?: string
     policyId?: string
+    signature?: string
 }
 
 /**

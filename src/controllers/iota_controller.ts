@@ -57,13 +57,18 @@ export class IotaController implements Controller {
         const policy = body.policy;
         const owner = body.owner;
         const deviceId = body.deviceId;
+        const signature = body.signature;
 
+        // Check if mandatory fields are present.
+        // If they are not, return rejected promise with message.
         if (_.isUndefined(policy))
             return Promise.reject(StringRes.MISSING_POLICY_ID_INSIDE_POLICY);
         if (_.isUndefined(owner))
             return Promise.reject(StringRes.MISSING_OWNER);
         if (_.isUndefined(deviceId))
             return Promise.reject(StringRes.MISSING_DEVICE_ID);
+        if (_.isUndefined(signature))
+            return Promise.reject(StringRes.MISSING_SIGNATURE);
 
         try {
             const policyId = policy.policy_id;
@@ -73,21 +78,36 @@ export class IotaController implements Controller {
             // check if policy with policyID already exists
             try {
                 await this.db.getPolicyByPolicyId(policyId);
-                return Promise.reject(StringRes.POLICY_ALREADY_EXIST);
+                const message = StringRes.POLICY_ADDED_SUCCESSFULLY;
+
+                let response: any;
+
+                if (this.type == CommunicationType.tcp)
+                    response = { response: message };
+                else
+                    response = utils.defaultResponse(false, message);
+
+                return Promise.resolve(response);
             } catch (err) {
-                // policy could not be found so everyting is OK
+                // policy could not be found so everything is OK
             }
 
+            logger.debug('addPolicy: Getting new address on tangle');
+
             const addr = await this.getNewAddress(this.seed);
+
+            logger.debug(`addPolicy: New address on tangle: ${addr}`);
 
             const policyJson = JSON.stringify({
                 policyId: policyId,
                 deviceId: deviceId,
                 owner: owner,
-                policy: policy
+                policy: policy,
+                signature: signature
             });
 
             const msgTrytes = Converter.asciiToTrytes(policyJson);
+
             const transactions = this.makeChunks(msgTrytes)
                 .map((chunk: string) => {
                     return {
@@ -98,20 +118,36 @@ export class IotaController implements Controller {
                     }
                 });
 
+            logger.debug('addPolicy: Preparing transfer of transactions');
+
             const trytes =
                 await this.iota.prepareTransfers(this.seed, transactions);
-            const bundle = await this.iota.sendTrytes(trytes, 3, 9);
+
+            logger.debug('addPolicy: Sending trytes to tangle');
+
+            const depth = 3;
+            const minimumWeightMagnitude = 9;
+
+            const bundle = await this.iota
+                .sendTrytes(trytes, depth, minimumWeightMagnitude);
 
             const hash = bundle[0].hash;
+
             const newPolicy: Policy = {
                 deviceId: deviceId,
                 hash: hash,
                 owner: owner,
                 policyId: policyId
             };
+
+            logger.debug('addPolicy: Adding policy to database');
+
             await this.db.addNewPolicy(newPolicy);
 
+            logger.debug('addPolicy: Policy added to database');
+
             const message = StringRes.POLICY_ADDED_SUCCESSFULLY;
+
             let response: any;
 
             if (this.type == CommunicationType.tcp)
@@ -204,7 +240,7 @@ export class IotaController implements Controller {
                 let response: any;
 
                 if (this.type == CommunicationType.tcp)
-                    response = { policy: fetchedPolicy };
+                    response = fetchedPolicy;
                 else
                     response = utils.defaultResponse(false, '', fetchedPolicy);
 
@@ -289,9 +325,9 @@ export class IotaController implements Controller {
     }
 
     /**
-     * Gets message from the bundle
+     * Gets message from the bundle.
      * 
-     * @param hash Hash of the message bundle
+     * @param hash Hash of the message bundle.
      */
     private async getMessageFromBundle(hash: string): Promise<string> {
         // regular expression for testing does signature message is comprised
@@ -316,9 +352,9 @@ export class IotaController implements Controller {
     }
 
     /**
-     * Calculate policy store ID for device
+     * Calculate policy store ID for device.
      * 
-     * @param deviceId ID of device
+     * @param deviceId ID of device.
      */
     private async calculatePolicyStoreId(deviceId: string): Promise<string> {
         try {
@@ -345,7 +381,7 @@ export class IotaController implements Controller {
     }
 
     /**
-     * Gets new address on tangle
+     * Gets new address on tangle.
      */
     private async getNewAddress(seed: string): Promise<string> {
         const addresses = await this.iota.getNewAddress(seed, {
@@ -368,9 +404,9 @@ export class IotaController implements Controller {
     };
 
     /**
-     * Makes chunks out of trytes
+     * Makes chunks out of trytes.
      * 
-     * @param trytes Trytes which will be splitted into chunks
+     * @param trytes Trytes which will be splitted into chunks.
      */
     private makeChunks(trytes: string): ReadonlyArray<string> {
         const regex = '.{1,' + MAX_TRYTES_IN_CHUNK + '}';

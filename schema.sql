@@ -1,6 +1,6 @@
 CREATE TABLE policy (
-  hash CHAR(81) PRIMARY KEY,
-  owner VARCHAR(64) NOT NULL,
+  "hash" CHAR(81) PRIMARY KEY,
+  "owner" VARCHAR(128) NOT NULL,
   "policyId" CHAR(64) NOT NULL UNIQUE,
   "deviceId" VARCHAR(50) NOT NULL
 )
