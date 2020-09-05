@@ -80,7 +80,3 @@ To stop store run:
 ```bash
 ./stop_store.sh
 ```
-
-## 5. Testing/Developing
-
-For testing and development create private tangle using `one-command-tangle` project which can be found [here](https://github.com/iota-community/one-command-tangle).
