@@ -47,7 +47,7 @@ There are two config files, `default.json` used for development, and `production
 * `server.tcp.listeningPort` - Listening port for TCP server.
 * `db.host` - Host address for database.
 * `db.port` - Port number for database.
-* `iri.host` - IP address for IOTA node.
+* `iri.host` - URL for IOTA node.
 * `iri.port` - Port number for IOTA node.
 
 ### 2.2. ENV file
