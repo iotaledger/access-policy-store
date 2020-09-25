@@ -68,7 +68,7 @@ POSTGRES_DB=
 Published port numbers must match corresponding port numbers in `config` files.
 
 ## 3. Start
-Install `Docker` on your system in order to run store. It is also required to have running and accessible node node.
+Install `Docker` on your system in order to run store. It is also required to have running and accessible IOTA node.
 
 To start store run:
 ```bash
