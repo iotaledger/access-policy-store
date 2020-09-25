@@ -37,7 +37,7 @@ There are two config files, `default.json` used for development, and `production
         "host": string,
         "port": number
     },
-    "iri": {
+    "node": {
         "host": string,
         "port": number
     }
@@ -47,8 +47,8 @@ There are two config files, `default.json` used for development, and `production
 * `server.tcp.listeningPort` - Listening port for TCP server.
 * `db.host` - Host address for database.
 * `db.port` - Port number for database.
-* `iri.host` - URL for IOTA node.
-* `iri.port` - Port number for IOTA node.
+* `node.host` - URL for IOTA node.
+* `node.port` - Port number for IOTA node.
 
 ### 2.2. ENV file
 Create `.env` file in root directory. It should contain next values:
@@ -68,7 +68,7 @@ POSTGRES_DB=
 Published port numbers must match corresponding port numbers in `config` files.
 
 ## 3. Start
-Install `Docker` on your system in order to run store. It is also required to have running and accessible IRI node.
+Install `Docker` on your system in order to run store. It is also required to have running and accessible node node.
 
 To start store run:
 ```bash

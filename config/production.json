@@ -11,7 +11,7 @@
         "host": "database",
         "port": 5432
     },
-    "iri": {
+    "node": {
         "host": "193.239.219.4",
         "port": 6005
     }
