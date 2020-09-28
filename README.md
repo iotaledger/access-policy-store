@@ -22,7 +22,7 @@ npm run build
 Configuring is done via `config`, `.env` and `Dockerfile` files.
 
 ### 2.1. Config files
-There are two config files, `default.json` used for development, and `production.json` used when running store in production environment. They both have the same structure:
+The configurations are set on `config/default.json`:
 ```JSON
 {
     "server": {
