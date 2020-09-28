@@ -126,7 +126,7 @@ export class IotaController implements Controller {
             logger.debug('addPolicy: Sending trytes to tangle');
 
             const depth = 3;
-            const minimumWeightMagnitude = 9;
+            const minimumWeightMagnitude = 14;
 
             const bundle = await this.iota
                 .sendTrytes(trytes, depth, minimumWeightMagnitude);
