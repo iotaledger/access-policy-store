@@ -1,7 +1,7 @@
 # IOTA Access Policy Store
 ## Overview
 Policy store consists of interface servers for managing delegation policies on IOTA tangle.
-It is able to manage REST and TCP requests and it communicates with IOTA IRI node for storing policies and local SQL database where their tangle addresses are stored.
+It is able to manage REST and TCP requests and it communicates with IOTA node for storing policies and local SQL database where their tangle addresses are stored.
 
 ## 1.0 Prerequisites
 You should have installed npm (Node Package Manager) on your system. If you don't have install it by running
@@ -37,7 +37,7 @@ The configurations are set on `config/default.json`:
         "host": string,
         "port": number
     },
-    "iri": {
+    "node": {
         "host": string,
         "port": number
     }
@@ -47,8 +47,8 @@ The configurations are set on `config/default.json`:
 * `server.tcp.listeningPort` - Listening port for TCP server.
 * `db.host` - Host address for database.
 * `db.port` - Port number for database.
-* `iri.host` - IP address for IRI node.
-* `iri.port` - Port number for IRI node.
+* `node.host` - IP address for IOTA node.
+* `node.port` - Port number for IOTA node.
 
 ### 2.2. ENV file
 Create `.env` file in root directory. It should contain next values:
@@ -68,7 +68,7 @@ POSTGRES_DB=
 Published port numbers must match corresponding port numbers in `config` files.
 
 ## 3. Start
-Install `Docker` on your system in order to run store. It is also required to have running and accessible IRI node.
+Install `Docker` on your system in order to run store. It is also required to have running and accessible IOTA node.
 
 To start store run:
 ```bash

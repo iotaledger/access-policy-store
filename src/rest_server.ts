@@ -33,19 +33,19 @@ const app = express();
 
 const main = () => {
     let PROVIDER_IP_ADDR: string;
-    if (config.has('iri.host')) {
-        PROVIDER_IP_ADDR = config.get('iri.host');
+    if (config.has('node.host')) {
+        PROVIDER_IP_ADDR = config.get('node.host');
     } else {
 
-        logger.error('Config file is missing iri.host definition. Exiting...');
+        logger.error('Config file is missing node.host definition. Exiting...');
         return process.exit(1);
     }
 
     let PROVIDER_PORT_NUMBER: string;
-    if (config.has('iri.port')) {
-        PROVIDER_PORT_NUMBER = config.get('iri.port');
+    if (config.has('node.port')) {
+        PROVIDER_PORT_NUMBER = config.get('node.port');
     } else {
-        logger.error('Config file is missing iri.port definition. Exiting...');
+        logger.error('Config file is missing node.port definition. Exiting...');
         return process.exit(1);
     }
 

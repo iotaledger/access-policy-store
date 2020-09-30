@@ -49,7 +49,7 @@ export class IotaController implements Controller {
         this.db = new PgDatabase();
 
         if (_.isUndefined(this.iota) || _.isNull(this.iota)) {
-            throw StringRes.UNABLE_TO_CONNECT_TO_IRI_NODE;
+            throw StringRes.UNABLE_TO_CONNECT_TO_IOTA_NODE;
         }
     }
 
