@@ -12,7 +12,7 @@
         "port": 5432
     },
     "iri": {
-        "host": "127.0.0.1",
-        "port": 6005
+        "host": "papa.iota.family",
+        "port": 14267
     }
 }

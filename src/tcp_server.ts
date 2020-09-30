@@ -78,7 +78,7 @@ const main = () => {
         return process.exit(1);
     }
 
-    const providerUrl = 'http://' + PROVIDER_IP_ADDR + ':' + PROVIDER_PORT_NUMBER;
+    const providerUrl = 'https://' + PROVIDER_IP_ADDR + ':' + PROVIDER_PORT_NUMBER;
 
     controller = new IotaController.IotaController(
         SEED,

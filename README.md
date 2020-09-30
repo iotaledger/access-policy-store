@@ -19,38 +19,7 @@ npm run build
 ```
 
 ## 2. Configuring
-Configuring is done via `config`, `.env` and `Dockerfile` files.
 
-### 2.1. Config files
-The configurations are set on `config/default.json`:
-```JSON
-{
-    "server": {
-        "rest": {
-            "listeningPort": number
-        },
-        "tcp": {
-            "listeningPort": number
-        }
-    },
-    "db": {
-        "host": string,
-        "port": number
-    },
-    "iri": {
-        "host": string,
-        "port": number
-    }
-}
-```
-* `server.rest.listeningPort` - Listening port for REST server.
-* `server.tcp.listeningPort` - Listening port for TCP server.
-* `db.host` - Host address for database.
-* `db.port` - Port number for database.
-* `iri.host` - IP address for IRI node.
-* `iri.port` - Port number for IRI node.
-
-### 2.2. ENV file
 Create `.env` file in root directory. It should contain next values:
 ```bash
 SEED=
@@ -64,8 +33,7 @@ POSTGRES_DB=
 * `POSTGRES_USER` - User for postgres.
 * `POSTGRES_DB` - Database to connect to in postgres.
 
-### 2.3. Dockerfile
-Published port numbers must match corresponding port numbers in `config` files.
+Published port numbers must match corresponding port numbers in `config/default.json`.
 
 ## 3. Start
 Install `Docker` on your system in order to run store. It is also required to have running and accessible IRI node.

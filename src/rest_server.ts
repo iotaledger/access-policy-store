@@ -63,7 +63,7 @@ const main = () => {
         return process.exit(1);
     }
 
-    const providerUrl = 'http://' +
+    const providerUrl = 'https://' +
         PROVIDER_IP_ADDR +
         ':' +
         PROVIDER_PORT_NUMBER;
