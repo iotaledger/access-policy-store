@@ -1,7 +1,7 @@
 # IOTA Access Policy Store
 ## Overview
 Policy store consists of interface servers for managing delegation policies on IOTA tangle.
-It is able to manage REST and TCP requests and it communicates with IOTA IRI node for storing policies and local SQL database where their tangle addresses are stored.
+It is able to manage REST and TCP requests and it communicates with IOTA node for storing policies and local SQL database where their tangle addresses are stored.
 
 ## 1.0 Prerequisites
 You should have installed npm (Node Package Manager) on your system. If you don't have install it by running
@@ -19,7 +19,6 @@ npm run build
 ```
 
 ## 2. Configuring
-
 Create `.env` file in root directory. It should contain next values:
 ```bash
 SEED=
@@ -48,7 +47,3 @@ To stop store run:
 ```bash
 ./stop_store.sh
 ```
-
-## 5. Testing/Developing
-
-For testing and development create private tangle using `one-command-tangle` project which can be found [here](https://github.com/iota-community/one-command-tangle).
