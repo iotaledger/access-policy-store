@@ -50,6 +50,13 @@ The configurations are set on `config/default.json`:
 * `node.host` - IP address for IOTA node.
 * `node.port` - Port number for IOTA node.
 
+**Warning ⚠️**
+As a known limitation, you will need a [HORNET](https://github.com/gohornet/hornet) node with the following available features:
+- `"attachToTangle"` enabled under `"permitRemoteAccess"` field of configuration file.
+- HTTP port available (usually 14265).
+
+Nodes behind load balancers or firewalls might present unexpected behaviour.
+
 ### 2.2. ENV file
 Create `.env` file in root directory. It should contain next values:
 ```bash
