@@ -4,10 +4,21 @@ Policy store consists of interface servers for managing delegation policies on I
 It is able to manage REST and TCP requests and it communicates with IOTA node for storing policies and local SQL database where their tangle addresses are stored.
 
 ## 1.0 Prerequisites
-You should have installed npm (Node Package Manager) on your system. If you don't have install it by running
+Make sure you have the following software installed on your system:
+* npm (Node Package Manager)
 ```bash
 sudo apt-get install npm
 ```
+* Docker
+```bash
+sudo apt-get install docker
+```
+* Docker-compose
+```bash
+sudo apt-get install docker-compose
+```
+
+
 ## 1.1 Building
 First install all dependencies by running next command inside projects root directory
 ```bash
